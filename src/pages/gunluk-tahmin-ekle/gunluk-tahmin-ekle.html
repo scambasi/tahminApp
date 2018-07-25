@@ -1,0 +1,48 @@
+
+<ion-header>
+
+  <ion-navbar>
+      <ion-title>Tahmin {{mode}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="tahminForm" (ngSubmit)="onSubmit()">
+        <ion-list>
+            <ion-item>
+              <ion-label floating>Bölge Adı</ion-label>
+              <ion-input type="text" formControlName="bolgeAdi"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Koşu Adı</ion-label>
+                <ion-input type="text" formControlName="kosuAdi"></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label>Tarihi</ion-label>
+                  <ion-datetime displayFormat="MMM DD YYYY" formControlName="tarihi"></ion-datetime>
+                </ion-item>
+                <ion-item>
+                  <ion-label>Saati</ion-label>
+                  <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="saati"></ion-datetime>
+              </ion-item>
+              <ion-item>
+                  <ion-label floating>Yarış Adı</ion-label>
+                  <ion-input type="text" formControlName="yarisAdi"></ion-input>
+
+                </ion-item>
+                <ion-item>
+                    <ion-label floating> Yarış Detayı</ion-label>
+                    <ion-textarea formControlName="yarisDetayi"></ion-textarea>
+                  </ion-item>
+         </ion-list>
+        <button type="button" clear ion-button block (click)="tahminleriEkle()" >Tahminleri Ekle</button>
+          <ion-list formArrayName="tahminler">
+            <ion-item *ngFor="let tahmin  of tahminForm.get('tahminler').controls;let i=index">
+              <ion-label floating >{{tahmin.ayak}}</ion-label>
+              <ion-input type="text" [formControlName]="i">{{tahmin.tahmini}}</ion-input>
+            </ion-item>
+          </ion-list>
+    </form>
+</ion-content>
